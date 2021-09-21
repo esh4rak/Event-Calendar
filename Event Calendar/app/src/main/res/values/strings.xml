@@ -11,4 +11,10 @@
     <string name="friday">FRI</string>
     <string name="saturday">SAT</string>
     <string name="add">Add</string>
+    <string name="event_name">Event Name:</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="start_time">Start Time:</string>
+    <string name="end_time">End Time:</string>
+    <string name="location">Location:</string>
 </resources>
