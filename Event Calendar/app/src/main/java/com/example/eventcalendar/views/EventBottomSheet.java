@@ -1,10 +1,16 @@
 package com.example.eventcalendar.views;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,6 +18,8 @@ import androidx.fragment.app.DialogFragment;
 
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.databinding.BottomSheetEventBinding;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 
@@ -42,6 +50,40 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         //setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle);
     }
 
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        dialog.setOnShowListener(dialogInterface -> {
+            BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
+            setupFullHeight(bottomSheetDialog);
+        });
+        return  dialog;
+    }
+
+    private void setupFullHeight(BottomSheetDialog bottomSheetDialog) {
+        FrameLayout bottomSheet = (FrameLayout) bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+        BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
+        ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
+
+        int windowHeight = getWindowHeight();
+        if (layoutParams != null) {
+            layoutParams.height = windowHeight;
+        }
+        bottomSheet.setLayoutParams(layoutParams);
+        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+    }
+
+    private int getWindowHeight() {
+        // Calculate window height for fullscreen use
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
+    }
+
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,6 +97,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
     }
 
 
+    @SuppressLint("SetTextI18n")
     private void init() {
 
         //event Name
@@ -66,9 +109,15 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         //end time
         binding.endTimeLayout.getEditText().setText(endTime);
 
-
         //location
         binding.locationLayout.getEditText().setText(location);
+
+        if(addOrUpdate.equals("add")){
+            binding.saveButton.setText("Save");
+        }
+        else if (addOrUpdate.equals("update")){
+            binding.saveButton.setText("Update");
+        }
 
 
         binding.saveButton.setOnClickListener(new View.OnClickListener() {
