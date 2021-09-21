@@ -42,7 +42,7 @@
             app:layout_constraintBottom_toTopOf="@id/itemEvent_Line"
             app:layout_constraintStart_toEndOf="@+id/itemEvent_CalenderIcon"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Novermber 05, 2020" />
+            tools:text="Novermber 05, 2021" />
 
         <Button
             android:id="@+id/itemEvent_editButton"
