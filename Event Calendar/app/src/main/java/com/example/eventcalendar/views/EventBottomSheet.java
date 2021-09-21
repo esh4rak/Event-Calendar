@@ -59,7 +59,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
             BottomSheetDialog bottomSheetDialog = (BottomSheetDialog) dialogInterface;
             setupFullHeight(bottomSheetDialog);
         });
-        return  dialog;
+        return dialog;
     }
 
     private void setupFullHeight(BottomSheetDialog bottomSheetDialog) {
@@ -81,7 +81,6 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         ((Activity) getContext()).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
     }
-
 
 
     @Nullable
@@ -112,10 +111,9 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         //location
         binding.locationLayout.getEditText().setText(location);
 
-        if(addOrUpdate.equals("add")){
+        if (addOrUpdate.equals("add")) {
             binding.saveButton.setText("Save");
-        }
-        else if (addOrUpdate.equals("update")){
+        } else if (addOrUpdate.equals("update")) {
             binding.saveButton.setText("Update");
         }
 

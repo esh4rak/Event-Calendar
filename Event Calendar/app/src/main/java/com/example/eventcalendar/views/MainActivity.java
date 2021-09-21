@@ -2,14 +2,18 @@ package com.example.eventcalendar.views;
 
 import static com.example.eventcalendar.views.utils.CalendarUtils.daysInWeekArray;
 import static com.example.eventcalendar.views.utils.CalendarUtils.monthYearFromDate;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.view.View;
+
 import com.example.eventcalendar.adapters.CalendarAdapter;
 import com.example.eventcalendar.databinding.ActivityMainBinding;
 import com.example.eventcalendar.views.utils.CalendarUtils;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -52,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
         });
 
 
-
         binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
                         null,
                         "add",
                         0);
-                bottomSheet.show(getSupportFragmentManager(),"playBottomSheetAllergies");
+                bottomSheet.show(getSupportFragmentManager(), "playBottomSheetAllergies");
 
             }
         });
@@ -105,9 +108,9 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     @Override
     public void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String AddOrUpdate, int Position) {
 
-        if(AddOrUpdate.equals("add")){
+        if (AddOrUpdate.equals("add")) {
             //AddManualMedicationAPI(MedicineNameStr, DoseNumberStr, DoseStr,  DirectionStr, DurationStr, PeriodStr,  StrengthStr,  ReasonStr);
-        }else if(AddOrUpdate.equals("update")){
+        } else if (AddOrUpdate.equals("update")) {
             //UpdateManualMedicationAPI(MedicineNameStr,  DoseNumberStr,  DoseStr,  DirectionStr,  DurationStr,  PeriodStr,  Position,  StrengthStr,  ReasonStr);
         }
 

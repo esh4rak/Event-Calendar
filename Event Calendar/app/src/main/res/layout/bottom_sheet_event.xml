@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/bottomSheetEvent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
     android:background="@color/white"
+    android:padding="10dp"
     android:theme="@style/Theme.EventCalendar">
 
     <TextView
@@ -47,6 +46,7 @@
         android:layout_marginTop="32dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
+        android:fontFamily="@font/nunito"
         android:hint="Event Name"
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -58,6 +58,7 @@
             android:id="@+id/eventNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="text"
             tools:ignore="LabelFor,TextFields,SpeakableTextPresentCheck" />
@@ -71,6 +72,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/nunito"
         android:hint="Start time"
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -82,6 +84,7 @@
             android:id="@+id/startTimeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="time"
             tools:ignore="LabelFor,TextFields,SpeakableTextPresentCheck" />
@@ -96,6 +99,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/nunito"
         android:hint="End Time"
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,6 +111,7 @@
             android:id="@+id/endTimeEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="time"
             tools:ignore="LabelFor,TextFields,SpeakableTextPresentCheck" />
@@ -121,6 +126,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
+        android:fontFamily="@font/nunito"
         android:hint="Location"
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
@@ -132,6 +138,7 @@
             android:id="@+id/locationEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
             android:inputType="text"
             tools:ignore="LabelFor,TextFields,SpeakableTextPresentCheck" />
@@ -174,8 +181,6 @@
         app:layout_constraintEnd_toStartOf="@+id/saveButton"
         app:layout_constraintTop_toTopOf="@+id/saveButton"
         tools:ignore="TextContrastCheck" />
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
