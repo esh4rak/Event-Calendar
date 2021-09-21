@@ -14,7 +14,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements EventBottomSheet.BottomSheetListener {
 
 
     private ActivityMainBinding binding;
@@ -51,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
+
+
+        binding.floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                EventBottomSheet bottomSheet = new EventBottomSheet(
+                        null,
+                        null,
+                        null,
+                        null,
+                        "add",
+                        0);
+                bottomSheet.show(getSupportFragmentManager(),"playBottomSheetAllergies");
+
+            }
+        });
+
     }
 
 
@@ -84,4 +102,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String AddOrUpdate, int Position) {
+
+        if(AddOrUpdate.equals("add")){
+            //AddManualMedicationAPI(MedicineNameStr, DoseNumberStr, DoseStr,  DirectionStr, DurationStr, PeriodStr,  StrengthStr,  ReasonStr);
+        }else if(AddOrUpdate.equals("update")){
+            //UpdateManualMedicationAPI(MedicineNameStr,  DoseNumberStr,  DoseStr,  DirectionStr,  DurationStr,  PeriodStr,  Position,  StrengthStr,  ReasonStr);
+        }
+
+    }
 }
