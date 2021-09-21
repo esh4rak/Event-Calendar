@@ -13,19 +13,17 @@
         android:id="@+id/labelTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="6dp"
+        android:layout_marginStart="8dp"
         android:fontFamily="@font/nunito_bold"
         android:letterSpacing="0.01"
         android:lineSpacingExtra="4sp"
-        android:text="Event"
-        android:textAlignment="textEnd"
+        android:text="@string/event"
+        android:textAlignment="center"
         android:textColor="#de000000"
         android:textSize="20sp"
-        android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="@+id/closeButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/closeButton"
-        tools:ignore="HardcodedText" />
+        app:layout_constraintTop_toTopOf="@+id/closeButton" />
 
     <Button
         android:id="@+id/closeButton"
@@ -34,16 +32,53 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_close_24"
+        android:backgroundTint="@color/gray"
         app:backgroundTint="@color/gray"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
+    <TextView
+        android:id="@+id/dateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nunito_bold"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="4sp"
+        android:text="@string/date"
+        android:textAlignment="textStart"
+        android:textColor="#de000000"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/labelTitle" />
+
+
+    <TextView
+        android:id="@+id/dateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/nunito"
+        android:letterSpacing="0.01"
+        android:lineSpacingExtra="4sp"
+        tools:text="@string/feb_2021"
+        android:textAlignment="textStart"
+        android:textColor="#de000000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dateLabel"
+        app:layout_constraintStart_toEndOf="@+id/dateLabel"
+        app:layout_constraintTop_toTopOf="@+id/dateLabel" />
+
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/eventNameLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:fontFamily="@font/nunito"
@@ -51,7 +86,7 @@
         app:boxBackgroundMode="outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/labelTitle"
+        app:layout_constraintTop_toBottomOf="@+id/dateLabel"
         tools:ignore="HardcodedText">
 
         <EditText

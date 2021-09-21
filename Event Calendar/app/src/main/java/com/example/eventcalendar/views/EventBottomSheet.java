@@ -4,18 +4,15 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-
+import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.DialogFragment;
-
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.databinding.BottomSheetEventBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -32,14 +29,16 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
     private String startTime;
     private String endTime;
     private String location;
+    private String date;
     private String addOrUpdate;
     private int position;
 
-    public EventBottomSheet(String eventName, String startTime, String endTime, String location, String addOrUpdate, int position) {
+    public EventBottomSheet(String eventName, String startTime, String endTime, String location, String date, String addOrUpdate, int position) {
         this.eventName = eventName;
         this.startTime = startTime;
         this.endTime = endTime;
         this.location = location;
+        this.date = date;
         this.addOrUpdate = addOrUpdate;
         this.position = position;
     }
@@ -47,7 +46,6 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setStyle(DialogFragment.STYLE_NORMAL, R.style.DialogStyle);
     }
 
 
@@ -111,6 +109,10 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         //location
         binding.locationLayout.getEditText().setText(location);
 
+        //Date
+        binding.dateTextView.setText(date);
+
+
         if (addOrUpdate.equals("add")) {
             binding.saveButton.setText("Save");
         } else if (addOrUpdate.equals("update")) {
@@ -126,12 +128,16 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
                 startTime = binding.startTimeEditText.getText().toString().trim();
                 endTime = binding.endTimeEditText.getText().toString().trim();
                 location = binding.locationEditText.getText().toString().trim();
+                date = binding.dateTextView.getText().toString().trim();
 
 
                 if (!eventName.isEmpty()) {
-                    bottomSheetListener.onSaveButtonClick(eventName, startTime, endTime, location, addOrUpdate, position);
+                    bottomSheetListener.onSaveButtonClick(eventName, startTime, endTime, location, date, addOrUpdate, position);
+                    dismiss();
+                }else {
+                    Toast.makeText(getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
                 }
-                dismiss();
+
             }
         });
 
@@ -155,7 +161,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
 
 
     public interface BottomSheetListener {
-        void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String AddOrUpdate, int Position);
+        void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position);
 
     }
 
