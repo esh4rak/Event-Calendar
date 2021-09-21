@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".views.MainActivity">
-
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -46,8 +44,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:text="@string/feb_2021"
             android:fontFamily="@font/nunito_semibold"
+            android:text="@string/feb_2021"
             android:textAlignment="center"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/previousWeekButton"
@@ -81,122 +79,146 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <LinearLayout
-        android:id="@+id/daysNameLayout"
-        android:layout_width="0dp"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/calendarCardView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/headerLayout">
 
-        <TextView
-            android:id="@+id/labelSunday"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/sunday"
-            android:textAlignment="center"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+            android:padding="5dp">
 
-        <TextView
-            android:id="@+id/labelMonday"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/monday"
-            android:textAlignment="center"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+            <LinearLayout
+                android:id="@+id/daysNameLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/labelTuesday"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/tuesday"
-            android:textAlignment="center"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/labelSunday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/sunday"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/labelWednesday"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/wednesday"
-            android:textAlignment="center"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/labelMonday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/monday"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/labelThursday"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/thursday"
-            android:textAlignment="center"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/labelTuesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/tuesday"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/labelFriday"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/friday"
-            android:textAlignment="center"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/labelWednesday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/wednesday"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
 
-        <TextView
-            android:id="@+id/labelSaturday"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_semibold"
-            android:text="@string/saturday"
-            android:textAlignment="center"
-            android:textColor="@color/gray"
-            android:textSize="16sp"
-            tools:ignore="TextContrastCheck" />
+                <TextView
+                    android:id="@+id/labelThursday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/thursday"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/labelFriday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/friday"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
+
+                <TextView
+                    android:id="@+id/labelSaturday"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/nunito_semibold"
+                    android:text="@string/saturday"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
 
 
-    </LinearLayout>
+            </LinearLayout>
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/calendarRecyclerView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/daysNameLayout" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/calendarRecyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/daysNameLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/eventRecyclerView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarCardView" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

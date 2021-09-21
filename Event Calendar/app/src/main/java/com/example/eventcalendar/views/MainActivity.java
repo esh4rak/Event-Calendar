@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         CalendarUtils.selectedDate = LocalDate.now();
+        init();
         setWeekView();
     }
 
@@ -37,13 +38,26 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
 
 
+        binding.previousWeekButton.setOnClickListener(view -> {
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
+            setWeekView();
+        });
+
+
+        binding.nextWeekButton.setOnClickListener(view -> {
+
+            CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
+            setWeekView();
+
+        });
+
     }
 
 
     private void setWeekView() {
+
         binding.monthYearTextView.setText(monthYearFromDate(CalendarUtils.selectedDate));
         days = daysInWeekArray(CalendarUtils.selectedDate);
-
 
         binding.calendarRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 7);
