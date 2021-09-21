@@ -3,7 +3,6 @@ package com.example.eventcalendar.views;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import com.example.eventcalendar.R;
 import com.example.eventcalendar.databinding.ActivityMainBinding;
 
 
@@ -27,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void init() {
+
     }
 
 

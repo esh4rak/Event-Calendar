@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Event Calendar</string>
+    <string name="previous">Previous</string>
+    <string name="next">Next</string>
+    <string name="feb_2021">Feb 2021</string>
+    <string name="sunday">SUN</string>
+    <string name="monday">MON</string>
+    <string name="tuesday">TUE</string>
+    <string name="wednesday">WED</string>
+    <string name="thursday">THUR</string>
+    <string name="friday">FRI</string>
+    <string name="saturday">SAT</string>
+    <string name="add">Add</string>
 </resources>
