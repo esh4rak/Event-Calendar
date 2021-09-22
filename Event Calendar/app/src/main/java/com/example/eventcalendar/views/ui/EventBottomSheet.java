@@ -1,4 +1,4 @@
-package com.example.eventcalendar.views;
+package com.example.eventcalendar.views.ui;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

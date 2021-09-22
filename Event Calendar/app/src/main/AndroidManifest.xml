@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EventCalendar">
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
