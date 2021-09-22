@@ -1,7 +1,8 @@
 package com.example.eventcalendar.views;
 
-import static com.example.eventcalendar.views.utils.CalendarUtils.daysInWeekArray;
-import static com.example.eventcalendar.views.utils.CalendarUtils.monthYearFromDate;
+
+import static com.example.eventcalendar.utils.CalendarUtils.daysInWeekArray;
+import static com.example.eventcalendar.utils.CalendarUtils.monthYearFromDate;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
@@ -14,11 +15,11 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 import com.example.eventcalendar.R;
-import com.example.eventcalendar.adapters.CalendarAdapter;
-import com.example.eventcalendar.adapters.EventAdapter;
 import com.example.eventcalendar.databinding.ActivityMainBinding;
 import com.example.eventcalendar.models.EventItem;
-import com.example.eventcalendar.views.utils.CalendarUtils;
+import com.example.eventcalendar.utils.CalendarUtils;
+import com.example.eventcalendar.views.adapters.CalendarAdapter;
+import com.example.eventcalendar.views.adapters.EventAdapter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 

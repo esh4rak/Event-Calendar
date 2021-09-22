@@ -1,4 +1,4 @@
-package com.example.eventcalendar.views.utils;
+package com.example.eventcalendar.utils;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package com.example.eventcalendar.adapters;
+package com.example.eventcalendar.views.adapters;
 
 
 import android.view.LayoutInflater;
