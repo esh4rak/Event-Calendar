@@ -6,23 +6,25 @@ import static com.example.eventcalendar.utils.CalendarUtils.monthYearFromDate;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Toast;
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.databinding.ActivityMainBinding;
 import com.example.eventcalendar.models.EventItem;
 import com.example.eventcalendar.utils.CalendarUtils;
+import com.example.eventcalendar.viewmodels.MainActivityViewModel;
 import com.example.eventcalendar.views.adapters.CalendarAdapter;
 import com.example.eventcalendar.views.adapters.EventAdapter;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
 
 public class MainActivity extends AppCompatActivity implements EventBottomSheet.BottomSheetListener {
@@ -35,6 +37,9 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
     private EventAdapter eventAdapter;
 
+    private MainActivityViewModel mainActivityViewModel;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,12 +50,36 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
         CalendarUtils.selectedDate = LocalDate.now();
         init();
-        setWeekView();
-        setEventAdapter();
+
     }
 
 
+
+    @SuppressLint("NotifyDataSetChanged")
     private void init() {
+
+        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+
+        mainActivityViewModel.init();
+
+
+        mainActivityViewModel.getEvents().observe(this, eventItems -> {
+
+            eventAdapter.setList(eventItems);
+            eventAdapter.notifyDataSetChanged();
+        });
+
+        mainActivityViewModel.getIsUpdating().observe(this, aBoolean -> {
+            if(aBoolean){
+                showProgressBar();
+            }
+            else{
+                hideProgressBar();
+                binding.eventRecyclerView.smoothScrollToPosition(mainActivityViewModel.getEvents().getValue().size()-1);
+            }
+        });
+
+
 
         binding.previousWeekButton.setOnClickListener(view -> {
             CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
@@ -79,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
             bottomSheet.show(getSupportFragmentManager(), "playBottomSheetAllergies");
 
         });
+
+
+        setWeekView();
+        setEventAdapter();
+
 
     }
 
@@ -189,7 +223,7 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     @Override
     public void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position) {
 
-        if (AddOrUpdate.equals("add")) {
+        /*if (AddOrUpdate.equals("add")) {
             eventItemArrayList.add(new EventItem("1354656",EventName,Date,StartTime,EndTime,Location));
             eventAdapter.notifyDataSetChanged();
             Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_LONG).show();
@@ -201,7 +235,33 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
             eventItemArrayList.get(Position).setDate(Date);
             eventAdapter.notifyItemChanged(Position);
             Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
-        }
+        }*/
 
+
+        String uniqueID = UUID.randomUUID().toString();
+
+
+        mainActivityViewModel.addValue(
+                new EventItem(
+                        uniqueID,
+                        EventName,
+                        Date,
+                        StartTime,
+                        EndTime,
+                        Location
+                )
+        );
+
+
+
+    }
+
+
+    private void showProgressBar(){
+        binding.progressBar.setVisibility(View.VISIBLE);
+    }
+
+    private void hideProgressBar(){
+        binding.progressBar.setVisibility(View.GONE);
     }
 }

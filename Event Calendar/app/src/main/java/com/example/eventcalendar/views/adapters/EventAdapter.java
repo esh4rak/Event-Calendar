@@ -29,6 +29,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         eEventItems = eventItems;
     }
 
+    public void setList(ArrayList<EventItem> eEventItems){
+        this.eEventItems = eEventItems;
+    }
 
 
     @NonNull
