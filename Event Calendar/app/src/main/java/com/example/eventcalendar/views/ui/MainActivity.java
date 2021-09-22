@@ -10,9 +10,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import com.example.eventcalendar.R;
@@ -55,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
 
 
-    @SuppressLint("NotifyDataSetChanged")
     private void init() {
 
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
@@ -65,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
         mainActivityViewModel.getEvents().observe(this, eventItems -> {
 
-            eventAdapter.setList(eventItems);
-            eventAdapter.notifyDataSetChanged();
+            eventAdapter.updateData(eventItems);
+
         });
 
         mainActivityViewModel.getIsUpdating().observe(this, aBoolean -> {
@@ -205,10 +202,9 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
+
     private void getEvents(){
-        eventItemArrayList = new ArrayList<>();
-        eventAdapter.notifyDataSetChanged();
+
     }
 
 
@@ -219,7 +215,6 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     }
 
 
-    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position) {
 

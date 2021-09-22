@@ -29,10 +29,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         eEventItems = eventItems;
     }
 
-    public void setList(ArrayList<EventItem> eEventItems){
-        this.eEventItems = eEventItems;
-    }
-
 
     @NonNull
     @Override
@@ -58,6 +54,23 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     @Override
     public int getItemCount() {
         return eEventItems.size();
+    }
+
+
+    public void updateData(ArrayList<EventItem> items) {
+        eEventItems.clear();
+        eEventItems.addAll(items);
+        notifyDataSetChanged();
+    }
+
+    public void addItem(int position, EventItem viewModel) {
+        eEventItems.add(position, viewModel);
+        notifyItemInserted(position);
+    }
+
+    public void removeItem(int position) {
+        eEventItems.remove(position);
+        notifyItemRemoved(position);
     }
 
 
