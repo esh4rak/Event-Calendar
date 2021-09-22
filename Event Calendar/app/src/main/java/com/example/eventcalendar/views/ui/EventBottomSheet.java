@@ -11,8 +11,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.databinding.BottomSheetEventBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -134,7 +136,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
                 if (!eventName.isEmpty()) {
                     bottomSheetListener.onSaveButtonClick(eventName, startTime, endTime, location, date, addOrUpdate, position);
                     dismiss();
-                }else {
+                } else {
                     Toast.makeText(getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
                 }
 

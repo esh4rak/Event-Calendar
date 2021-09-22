@@ -6,13 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.models.EventItem;
 import com.google.android.material.card.MaterialCardView;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
@@ -77,6 +79,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     public interface OnItemClickListener {
 
         void onItemClick(int position, View v);
+
         void onEditButtonClick(int position, View v);
     }
 

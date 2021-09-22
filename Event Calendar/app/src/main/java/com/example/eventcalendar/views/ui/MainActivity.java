@@ -3,6 +3,7 @@ package com.example.eventcalendar.views.ui;
 
 import static com.example.eventcalendar.utils.CalendarUtils.daysInWeekArray;
 import static com.example.eventcalendar.utils.CalendarUtils.monthYearFromDate;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
@@ -10,9 +11,11 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.databinding.ActivityMainBinding;
 import com.example.eventcalendar.models.EventItem;
@@ -20,6 +23,7 @@ import com.example.eventcalendar.utils.CalendarUtils;
 import com.example.eventcalendar.viewmodels.MainActivityViewModel;
 import com.example.eventcalendar.views.adapters.CalendarAdapter;
 import com.example.eventcalendar.views.adapters.EventAdapter;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -52,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     }
 
 
-
     private void init() {
 
         mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
@@ -67,15 +70,13 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
         });
 
         mainActivityViewModel.getIsUpdating().observe(this, aBoolean -> {
-            if(aBoolean){
+            if (aBoolean) {
                 showProgressBar();
-            }
-            else{
+            } else {
                 hideProgressBar();
-                binding.eventRecyclerView.smoothScrollToPosition(mainActivityViewModel.getEvents().getValue().size()-1);
+                binding.eventRecyclerView.smoothScrollToPosition(mainActivityViewModel.getEvents().getValue().size() - 1);
             }
         });
-
 
 
         binding.previousWeekButton.setOnClickListener(view -> {
@@ -137,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
     }
 
-    private void setEventAdapter(){
+    private void setEventAdapter() {
 
 
         eventItemArrayList = new ArrayList<>();
@@ -196,15 +197,8 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     }
 
 
-
-    private void DeleteItem(int position){
+    private void DeleteItem(int position) {
         //Todo
-    }
-
-
-
-    private void getEvents(){
-
     }
 
 
@@ -217,21 +211,6 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
     @Override
     public void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position) {
-
-        /*if (AddOrUpdate.equals("add")) {
-            eventItemArrayList.add(new EventItem("1354656",EventName,Date,StartTime,EndTime,Location));
-            eventAdapter.notifyDataSetChanged();
-            Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_LONG).show();
-        } else if (AddOrUpdate.equals("update")) {
-            eventItemArrayList.get(Position).setEventName(EventName);
-            eventItemArrayList.get(Position).setStartTime(StartTime);
-            eventItemArrayList.get(Position).setEndTime(EndTime);
-            eventItemArrayList.get(Position).setLocation(Location);
-            eventItemArrayList.get(Position).setDate(Date);
-            eventAdapter.notifyItemChanged(Position);
-            Toast.makeText(getApplicationContext(), "Updated", Toast.LENGTH_LONG).show();
-        }*/
-
 
         String uniqueID = UUID.randomUUID().toString();
 
@@ -248,15 +227,14 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
         );
 
 
-
     }
 
 
-    private void showProgressBar(){
+    private void showProgressBar() {
         binding.progressBar.setVisibility(View.VISIBLE);
     }
 
-    private void hideProgressBar(){
+    private void hideProgressBar() {
         binding.progressBar.setVisibility(View.GONE);
     }
 }
