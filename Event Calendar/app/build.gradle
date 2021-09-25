@@ -59,4 +59,7 @@ dependencies {
     // Annotation processor
     annotationProcessor "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
 
+    //Spinkit
+    implementation 'com.github.ybq:Android-SpinKit:1.4.0'
+
 }

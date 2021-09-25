@@ -1,21 +1,21 @@
 package com.example.eventcalendar.views;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.eventcalendar.databinding.ActivitySplashScreenBinding;
+import com.example.eventcalendar.databinding.ActivitySignInBinding;
 
 
-public class SplashScreenActivity extends AppCompatActivity {
+public class SignInActivity extends AppCompatActivity {
 
-
-    private ActivitySplashScreenBinding binding;
+    private ActivitySignInBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivitySplashScreenBinding.inflate(getLayoutInflater());
+        binding = ActivitySignInBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 

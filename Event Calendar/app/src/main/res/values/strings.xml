@@ -20,4 +20,6 @@
     <string name="event">Event</string>
     <string name="date">Date:</string>
     <string name="calendar">Calendar</string>
+    <string name="sign_in_here">Sign In Here</string>
+    <string name="sign_in_with_google">Sign in with Google</string>
 </resources>
