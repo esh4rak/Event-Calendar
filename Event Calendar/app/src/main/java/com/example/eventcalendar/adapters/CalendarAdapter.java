@@ -1,4 +1,4 @@
-package com.example.eventcalendar.views.adapters;
+package com.example.eventcalendar.adapters;
 
 
 import android.graphics.Color;

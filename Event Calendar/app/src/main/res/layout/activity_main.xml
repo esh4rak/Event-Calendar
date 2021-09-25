@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/light_white"
-    tools:context=".views.ui.MainActivity">
+    tools:context=".views.MainActivity">
 
 
     <com.google.android.material.card.MaterialCardView

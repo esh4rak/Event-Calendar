@@ -1,4 +1,4 @@
-package com.example.eventcalendar.views.ui;
+package com.example.eventcalendar.views;
 
 
 import static com.example.eventcalendar.utils.CalendarUtils.daysInWeekArray;
@@ -21,8 +21,8 @@ import com.example.eventcalendar.databinding.ActivityMainBinding;
 import com.example.eventcalendar.models.EventItem;
 import com.example.eventcalendar.utils.CalendarUtils;
 import com.example.eventcalendar.viewmodels.MainActivityViewModel;
-import com.example.eventcalendar.views.adapters.CalendarAdapter;
-import com.example.eventcalendar.views.adapters.EventAdapter;
+import com.example.eventcalendar.adapters.CalendarAdapter;
+import com.example.eventcalendar.adapters.EventAdapter;
 
 import java.time.LocalDate;
 import java.util.ArrayList;

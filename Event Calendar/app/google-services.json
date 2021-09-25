@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "384180113255",
+    "project_id": "event-calendar-48b5d",
+    "storage_bucket": "event-calendar-48b5d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:384180113255:android:df576295978019b6c4e9c2",
+        "android_client_info": {
+          "package_name": "com.example.eventcalendar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "384180113255-afl9gq4989s09n7a7fdmokm403h0as35.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBm13lL5vzR0IrT-A4uicPKfou3yG_08QA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "384180113255-afl9gq4989s09n7a7fdmokm403h0as35.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
