@@ -121,7 +121,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
-            android:inputType="time"
+            android:focusableInTouchMode="true"
+            android:cursorVisible="false"
+            android:focusable="false"
             tools:ignore="LabelFor,TextFields,SpeakableTextPresentCheck" />
 
 
@@ -148,7 +150,9 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito"
             android:importantForAutofill="no"
-            android:inputType="time"
+            android:focusableInTouchMode="true"
+            android:cursorVisible="false"
+            android:focusable="false"
             tools:ignore="LabelFor,TextFields,SpeakableTextPresentCheck" />
 
 

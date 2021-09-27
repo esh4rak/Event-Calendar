@@ -3,6 +3,7 @@ package com.example.eventcalendar.views;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,6 +22,11 @@ import com.example.eventcalendar.databinding.BottomSheetEventBinding;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 public class EventBottomSheet extends BottomSheetDialogFragment {
@@ -125,6 +132,72 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         }
 
 
+        binding.startTimeEditText.setOnClickListener(view -> {
+            Calendar datetime = Calendar.getInstance();
+            int hour = datetime.get(Calendar.HOUR_OF_DAY);
+            int minute = datetime.get(Calendar.MINUTE);
+
+            TimePickerDialog mTimePicker;
+            mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
+                    String time = selectedHour + ":" + selectedMinute;
+
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
+                    Date date = null;
+                    try {
+                        date = fmt.parse(time);
+                    } catch (ParseException e) {
+
+                        e.printStackTrace();
+                    }
+
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat fmtOut = new SimpleDateFormat("hh:mm aa");
+
+                    String formattedTime = fmtOut.format(date);
+
+                    binding.startTimeEditText.setText(formattedTime);
+                }
+            }, hour, minute, false);//Yes 24 hour time
+            mTimePicker.setTitle("Select Time");
+            mTimePicker.show();
+
+        });
+
+        binding.endTimeEditText.setOnClickListener(view -> {
+
+            Calendar datetime = Calendar.getInstance();
+            int hour = datetime.get(Calendar.HOUR_OF_DAY);
+            int minute = datetime.get(Calendar.MINUTE);
+
+            TimePickerDialog mTimePicker;
+            mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
+                @Override
+                public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+                    String time = selectedHour + ":" + selectedMinute;
+
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
+                    Date date = null;
+                    try {
+                        date = fmt.parse(time);
+                    } catch (ParseException e) {
+
+                        e.printStackTrace();
+                    }
+
+                    @SuppressLint("SimpleDateFormat") SimpleDateFormat fmtOut = new SimpleDateFormat("hh:mm aa");
+
+                    String formattedTime = fmtOut.format(date);
+
+                    binding.endTimeEditText.setText(formattedTime);
+                }
+            }, hour, minute, false);//Yes 24 hour time
+            mTimePicker.setTitle("Select Time");
+            mTimePicker.show();
+        });
+
+
         binding.saveButton.setOnClickListener(v -> {
 
             eventName = binding.eventNameLayout.getEditText().getText().toString().trim();
@@ -135,7 +208,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
 
 
             if (!eventName.isEmpty()) {
-                bottomSheetListener.onSaveButtonClick(eventID,eventName, startTime, endTime, location, date, addOrUpdate, position);
+                bottomSheetListener.onSaveButtonClick(eventID, eventName, startTime, endTime, location, date, addOrUpdate, position);
                 dismiss();
             } else {
                 Toast.makeText(getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
