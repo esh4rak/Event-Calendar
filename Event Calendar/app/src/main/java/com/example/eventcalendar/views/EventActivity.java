@@ -273,6 +273,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
                     Location
             ));
             Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_SHORT).show();
+            getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
 
         }
 

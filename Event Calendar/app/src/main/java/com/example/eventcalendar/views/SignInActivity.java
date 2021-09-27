@@ -104,7 +104,7 @@ public class SignInActivity extends AppCompatActivity {
     private void signInWithGoogle(AuthCredential authCredential) {
         signInViewModel.signInWithGoogle(authCredential);
         signInViewModel.authenticateUserLiveData.observe(this, s -> {
-            Toast.makeText(SignInActivity.this, "" + s, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(SignInActivity.this, "" + s, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(SignInActivity.this, EventActivity.class);
             startActivity(intent);
             finish();

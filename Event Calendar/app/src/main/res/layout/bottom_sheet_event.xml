@@ -5,7 +5,6 @@
     android:id="@+id/bottomSheetEvent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:padding="10dp"
     android:theme="@style/Theme.EventCalendar">
 
@@ -19,7 +18,6 @@
         android:lineSpacingExtra="4sp"
         android:text="@string/event"
         android:textAlignment="center"
-        android:textColor="#de000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/closeButton"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +48,6 @@
         android:lineSpacingExtra="4sp"
         android:text="@string/date"
         android:textAlignment="textStart"
-        android:textColor="#de000000"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/labelTitle" />
@@ -66,7 +63,6 @@
         android:lineSpacingExtra="4sp"
         tools:text="@string/feb_2021"
         android:textAlignment="textStart"
-        android:textColor="#de000000"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/dateLabel"
         app:layout_constraintStart_toEndOf="@+id/dateLabel"
