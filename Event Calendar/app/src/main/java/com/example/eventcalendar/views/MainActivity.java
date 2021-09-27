@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     }
 
     private void setProfile(SignInUser signInUser) {
-        if(signInUser != null){
+        if (signInUser != null) {
             Glide.with(getApplicationContext()).load(signInUser.getImageUrl())
                     .centerCrop().placeholder(R.drawable.ic_person_24).into(binding.profileImageId);
             binding.profileNameId.setText(signInUser.getName());
@@ -287,7 +287,7 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     private void signOut() {
         firebaseAuth.signOut();
         googleSignInClient.signOut();
-        Intent intent= new Intent(getApplicationContext(),SignInActivity.class);
+        Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(intent);
         finish();
     }

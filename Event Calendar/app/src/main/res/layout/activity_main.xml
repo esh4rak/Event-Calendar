@@ -48,11 +48,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/nunito_bold"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintBottom_toTopOf="@+id/profileEmailId"
                 app:layout_constraintEnd_toStartOf="@+id/signOutButtonId"
                 app:layout_constraintStart_toEndOf="@+id/profileImageId"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
                 tools:text="Name" />
 
             <TextView
@@ -60,11 +61,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="@font/nunito"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/signOutButtonId"
                 app:layout_constraintStart_toEndOf="@+id/profileImageId"

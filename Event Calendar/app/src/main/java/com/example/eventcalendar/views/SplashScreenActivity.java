@@ -6,11 +6,13 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 
 import com.example.eventcalendar.databinding.ActivitySplashScreenBinding;
 import com.example.eventcalendar.models.SignInUser;
 import com.example.eventcalendar.viewmodels.SignInViewModel;
+import com.github.ybq.android.spinkit.style.ChasingDots;
 
 
 public class SplashScreenActivity extends AppCompatActivity {
@@ -28,8 +30,22 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(view);
 
 
-        initSplashViewModel();
-        checkIfUserIsAuthenticated();
+        ChasingDots chasingDots = new ChasingDots();
+        binding.spinKitView.setIndeterminateDrawable(chasingDots);
+
+
+        int SPLASH_DISPLAY_LENGTH = 3000;
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run() {
+                initSplashViewModel();
+                checkIfUserIsAuthenticated();
+            }
+        }, SPLASH_DISPLAY_LENGTH);
+
+
+
+
 
 
     }
