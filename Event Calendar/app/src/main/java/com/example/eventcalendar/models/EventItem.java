@@ -5,12 +5,12 @@ import java.io.Serializable;
 
 public class EventItem implements Serializable {
 
-    private String id;
-    private String eventName;
-    private String date;
-    private String startTime;
-    private String endTime;
-    private String location;
+    public String id;
+    public String eventName;
+    public String date;
+    public String startTime;
+    public String endTime;
+    public String location;
 
 
     public EventItem(String id, String eventName, String date, String startTime, String endTime, String location) {

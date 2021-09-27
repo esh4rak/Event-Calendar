@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EventCalendar">
         <activity
-            android:name=".views.MainActivity"
+            android:name=".views.EventActivity"
             android:exported="true"/>
         <activity
             android:name=".views.SignInActivity"

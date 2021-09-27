@@ -17,14 +17,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.eventcalendar.R;
-import com.example.eventcalendar.databinding.ActivityMainBinding;
+import com.example.eventcalendar.databinding.ActivityEventBinding;
 import com.example.eventcalendar.models.EventItem;
 import com.example.eventcalendar.models.SignInUser;
 import com.example.eventcalendar.utils.CalendarUtils;
-import com.example.eventcalendar.viewmodels.MainActivityViewModel;
+import com.example.eventcalendar.viewmodels.EventViewModel;
 import com.example.eventcalendar.adapters.CalendarAdapter;
 import com.example.eventcalendar.adapters.EventAdapter;
 import com.example.eventcalendar.viewmodels.SignInViewModel;
@@ -38,17 +39,17 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 
-public class MainActivity extends AppCompatActivity implements EventBottomSheet.BottomSheetListener {
+public class EventActivity extends AppCompatActivity implements EventBottomSheet.BottomSheetListener {
 
 
-    private ActivityMainBinding binding;
+    private ActivityEventBinding binding;
 
     private ArrayList<LocalDate> days;
     private ArrayList<EventItem> eventItemArrayList;
 
     private EventAdapter eventAdapter;
 
-    private MainActivityViewModel mainActivityViewModel;
+    private EventViewModel eventViewModel;
 
     private GoogleSignInClient googleSignInClient;
 
@@ -61,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityEventBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -108,23 +109,23 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
     private void init() {
 
-        mainActivityViewModel = new ViewModelProvider(this).get(MainActivityViewModel.class);
+        eventViewModel = new ViewModelProvider(this).get(EventViewModel.class);
 
-        mainActivityViewModel.init();
+        eventViewModel.init();
 
 
-        mainActivityViewModel.getEvents().observe(this, eventItems -> {
+        eventViewModel.getEvents().observe(this, eventItems -> {
 
             eventAdapter.updateData(eventItems);
 
         });
 
-        mainActivityViewModel.getIsUpdating().observe(this, aBoolean -> {
+        eventViewModel.getIsUpdating().observe(this, aBoolean -> {
             if (aBoolean) {
                 showProgressBar();
             } else {
                 hideProgressBar();
-                binding.eventRecyclerView.smoothScrollToPosition(mainActivityViewModel.getEvents().getValue().size() - 1);
+                //binding.eventRecyclerView.smoothScrollToPosition(eventViewModel.getEvents().getValue().size() - 1);
             }
         });
 
@@ -215,11 +216,11 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
             @Override
             public void onEditButtonClick(int position, View v) {
 
-                PopupMenu popup = new PopupMenu(MainActivity.this, v, Gravity.END);
+                PopupMenu popup = new PopupMenu(EventActivity.this, v, Gravity.END);
                 popup.inflate(R.menu.card_threedot);
                 popup.setOnMenuItemClickListener(item -> {
                     if (item.getItemId() == R.id.cardThreeDot_delete) {
-                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(EventActivity.this);
                         builder.setMessage("Do you want to delete this item ?").setCancelable(false)
                                 .setPositiveButton("Yes", (dialog, which) -> DeleteItem(position))
                                 .setNegativeButton("No", (dialog, which) -> dialog.dismiss());
@@ -270,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
         String uniqueID = UUID.randomUUID().toString();
 
 
-        mainActivityViewModel.addValue(
+        eventViewModel.addValue(
                 new EventItem(
                         uniqueID,
                         EventName,
@@ -280,6 +281,15 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
                         Location
                 )
         );
+
+
+        eventViewModel.insertResultLiveData.observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
 
     }

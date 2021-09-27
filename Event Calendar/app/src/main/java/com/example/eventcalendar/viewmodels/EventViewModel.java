@@ -11,11 +11,12 @@ import com.example.eventcalendar.repositories.EventRepository;
 import java.util.ArrayList;
 
 
-public class MainActivityViewModel extends ViewModel {
+public class EventViewModel extends ViewModel {
 
     private MutableLiveData<ArrayList<EventItem>> eEvents;
     private EventRepository eventRepository;
     private MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
+    public LiveData<String> insertResultLiveData;
 
 
     public void init() {
@@ -30,10 +31,8 @@ public class MainActivityViewModel extends ViewModel {
     public void addValue(final EventItem eventItem) {
         mIsUpdating.setValue(true);
 
+        insertResultLiveData = eventRepository.insertEventFirebase(eventItem);
 
-        ArrayList<EventItem> currentEvents = eEvents.getValue();
-        currentEvents.add(eventItem);
-        eEvents.postValue(currentEvents);
         mIsUpdating.postValue(false);
 
     }

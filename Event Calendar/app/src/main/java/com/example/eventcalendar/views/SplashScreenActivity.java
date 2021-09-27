@@ -80,7 +80,7 @@ public class SplashScreenActivity extends AppCompatActivity {
             @Override
             public void onChanged(SignInUser signInUser) {
                 //goToMainActivity(signInUser);
-                Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashScreenActivity.this, EventActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -88,7 +88,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private void goToMainActivity() {
-        Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+        Intent intent = new Intent(SplashScreenActivity.this, EventActivity.class);
         startActivity(intent);
         finish();
     }

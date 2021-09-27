@@ -110,7 +110,7 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onChanged(String s) {
                 Toast.makeText(SignInActivity.this, "" + s, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                Intent intent = new Intent(SignInActivity.this, EventActivity.class);
                 startActivity(intent);
                 finish();
             }
