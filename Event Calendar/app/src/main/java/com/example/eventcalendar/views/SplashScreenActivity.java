@@ -57,11 +57,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         });
     }
 
-    private void goToMainActivity() {
-        Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     private void getUserInformation() {
         signInViewModel.collectUserInfo();
@@ -74,6 +69,12 @@ public class SplashScreenActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void goToMainActivity() {
+        Intent intent = new Intent(SplashScreenActivity.this, MainActivity.class);
+        startActivity(intent);
+        finish();
     }
 
     private void goToSignInActivity() {

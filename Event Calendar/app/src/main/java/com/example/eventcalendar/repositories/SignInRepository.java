@@ -69,15 +69,7 @@ public class SignInRepository {
                 FirebaseUser currentUser = firebaseAuth.getCurrentUser();
                 String uId = currentUser.getUid().toString();
                 authMutableLiveData.setValue(uId);
-                /*if(currentUser !=null){
-                    String uId= currentUser.getUid().toString();
-                    String name= currentUser.getDisplayName().toString();
-                    String email= currentUser.getEmail().toString();
-                    Uri getImageUrl= currentUser.getPhotoUrl();
-                    String imageUrl= getImageUrl.toString();
-                    SignInUser user= new SignInUser(uId,name,email,imageUrl);
-                    authMutableLiveData.setValue(user);
-                }*/
+
 
             }
         }).addOnFailureListener(new OnFailureListener() {
