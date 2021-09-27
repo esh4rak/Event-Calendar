@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.models.EventItem;
 import com.google.android.material.card.MaterialCardView;
-import java.util.ArrayList;
 
+import java.util.ArrayList;
 
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
@@ -59,7 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     }
 
 
-    public void getEvents(ArrayList<EventItem> items){
+    public void getEvents(ArrayList<EventItem> items) {
         eEventItems.clear();
         eEventItems.addAll(items);
         notifyDataSetChanged();

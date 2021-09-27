@@ -1,20 +1,20 @@
 package com.example.eventcalendar.views;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
 import com.example.eventcalendar.databinding.ActivitySplashScreenBinding;
-import com.example.eventcalendar.models.SignInUser;
 import com.example.eventcalendar.viewmodels.SignInViewModel;
 import com.github.ybq.android.spinkit.style.ChasingDots;
 
 
+@SuppressLint("CustomSplashScreen")
 public class SplashScreenActivity extends AppCompatActivity {
 
 
@@ -34,18 +34,11 @@ public class SplashScreenActivity extends AppCompatActivity {
         binding.spinKitView.setIndeterminateDrawable(chasingDots);
 
 
-        int SPLASH_DISPLAY_LENGTH = 3000;
-        new Handler().postDelayed(new Runnable(){
-            @Override
-            public void run() {
-                initSplashViewModel();
-                checkIfUserIsAuthenticated();
-            }
+        int SPLASH_DISPLAY_LENGTH = 2000;
+        new Handler().postDelayed(() -> {
+            initSplashViewModel();
+            checkIfUserIsAuthenticated();
         }, SPLASH_DISPLAY_LENGTH);
-
-
-
-
 
 
     }
@@ -61,31 +54,15 @@ public class SplashScreenActivity extends AppCompatActivity {
     private void checkIfUserIsAuthenticated() {
 
         signInViewModel.checkAuthentication();
-        signInViewModel.checkAuthenticateLiveData.observe(this, new Observer<SignInUser>() {
-            @Override
-            public void onChanged(SignInUser signInUser) {
-                if (!signInUser.isAuth) {
-                    goToSignInActivity();
-                } else {
-                    goToMainActivity();
-                }
+        signInViewModel.checkAuthenticateLiveData.observe(this, signInUser -> {
+            if (!signInUser.isAuth) {
+                goToSignInActivity();
+            } else {
+                goToMainActivity();
             }
         });
     }
 
-
-    private void getUserInformation() {
-        signInViewModel.collectUserInfo();
-        signInViewModel.collectUserInfoLiveData.observe(this, new Observer<SignInUser>() {
-            @Override
-            public void onChanged(SignInUser signInUser) {
-                //goToMainActivity(signInUser);
-                Intent intent = new Intent(SplashScreenActivity.this, EventActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
 
     private void goToMainActivity() {
         Intent intent = new Intent(SplashScreenActivity.this, EventActivity.class);

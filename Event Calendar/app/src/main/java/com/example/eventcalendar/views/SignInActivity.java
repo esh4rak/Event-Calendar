@@ -1,7 +1,6 @@
 package com.example.eventcalendar.views;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
@@ -45,9 +44,7 @@ public class SignInActivity extends AppCompatActivity {
         signInMethod();
 
 
-        binding.signInButton.setOnClickListener(view1 -> {
-            signIn();
-        });
+        binding.signInButton.setOnClickListener(view1 -> signIn());
     }
 
     private void intiSignInViewModel() {
@@ -106,14 +103,11 @@ public class SignInActivity extends AppCompatActivity {
 
     private void signInWithGoogle(AuthCredential authCredential) {
         signInViewModel.signInWithGoogle(authCredential);
-        signInViewModel.authenticateUserLiveData.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Toast.makeText(SignInActivity.this, "" + s, Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(SignInActivity.this, EventActivity.class);
-                startActivity(intent);
-                finish();
-            }
+        signInViewModel.authenticateUserLiveData.observe(this, s -> {
+            Toast.makeText(SignInActivity.this, "" + s, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(SignInActivity.this, EventActivity.class);
+            startActivity(intent);
+            finish();
         });
     }
 

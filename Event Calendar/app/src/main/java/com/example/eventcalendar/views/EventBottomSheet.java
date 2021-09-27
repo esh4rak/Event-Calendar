@@ -125,42 +125,29 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         }
 
 
-        binding.saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        binding.saveButton.setOnClickListener(v -> {
 
-                eventName = binding.eventNameLayout.getEditText().getText().toString().trim();
-                startTime = binding.startTimeEditText.getText().toString().trim();
-                endTime = binding.endTimeEditText.getText().toString().trim();
-                location = binding.locationEditText.getText().toString().trim();
-                date = binding.dateTextView.getText().toString().trim();
+            eventName = binding.eventNameLayout.getEditText().getText().toString().trim();
+            startTime = binding.startTimeEditText.getText().toString().trim();
+            endTime = binding.endTimeEditText.getText().toString().trim();
+            location = binding.locationEditText.getText().toString().trim();
+            date = binding.dateTextView.getText().toString().trim();
 
 
-                if (!eventName.isEmpty()) {
-                    bottomSheetListener.onSaveButtonClick(eventID,eventName, startTime, endTime, location, date, addOrUpdate, position);
-                    dismiss();
-                } else {
-                    Toast.makeText(getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
-
-
-        binding.cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+            if (!eventName.isEmpty()) {
+                bottomSheetListener.onSaveButtonClick(eventID,eventName, startTime, endTime, location, date, addOrUpdate, position);
                 dismiss();
+            } else {
+                Toast.makeText(getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
             }
+
         });
 
 
-        binding.closeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dismiss();
-            }
-        });
+        binding.cancelButton.setOnClickListener(v -> dismiss());
+
+
+        binding.closeButton.setOnClickListener(v -> dismiss());
 
     }
 

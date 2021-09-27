@@ -3,8 +3,10 @@ package com.example.eventcalendar.viewmodels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+
 import com.example.eventcalendar.models.EventItem;
 import com.example.eventcalendar.repositories.EventRepository;
+
 import java.util.ArrayList;
 
 
@@ -36,15 +38,14 @@ public class EventViewModel extends ViewModel {
     }
 
 
-    public void updateInfo(EventItem eventItem){
+    public void updateInfo(EventItem eventItem) {
         eventRepository.updateInfoFirebase(eventItem);
     }
 
 
-    public void delete(String id){
+    public void delete(String id) {
         eventRepository.deleteDataFirebase(id);
     }
-
 
 
 }

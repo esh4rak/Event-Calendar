@@ -229,18 +229,15 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
     }
 
-
     private void DeleteItem(int position) {
         eventViewModel.delete(eventItemArrayList.get(position).getId());
-        Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
         eventAdapter.removeItem(position);
+        Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
     }
-
 
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
 
@@ -249,9 +246,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
 
         if (AddOrUpdate.equals("add")) {
-
             String uniqueID = UUID.randomUUID().toString();
-
             eventViewModel.addValue(
                     new EventItem(
                             uniqueID,
@@ -268,7 +263,6 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
             getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
 
         } else if (AddOrUpdate.equals("update")) {
-
 
             eventViewModel.updateInfo(new EventItem(
                     EventID,
