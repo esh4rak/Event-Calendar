@@ -27,6 +27,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetListener bottomSheetListener;
     private BottomSheetEventBinding binding;
 
+    private String eventID;
     private String eventName;
     private String startTime;
     private String endTime;
@@ -35,7 +36,8 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
     private String addOrUpdate;
     private int position;
 
-    public EventBottomSheet(String eventName, String startTime, String endTime, String location, String date, String addOrUpdate, int position) {
+    public EventBottomSheet(String eventID, String eventName, String startTime, String endTime, String location, String date, String addOrUpdate, int position) {
+        this.eventID = eventID;
         this.eventName = eventName;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -44,6 +46,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
         this.addOrUpdate = addOrUpdate;
         this.position = position;
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -134,7 +137,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
 
 
                 if (!eventName.isEmpty()) {
-                    bottomSheetListener.onSaveButtonClick(eventName, startTime, endTime, location, date, addOrUpdate, position);
+                    bottomSheetListener.onSaveButtonClick(eventID,eventName, startTime, endTime, location, date, addOrUpdate, position);
                     dismiss();
                 } else {
                     Toast.makeText(getContext(), "Please Enter Name", Toast.LENGTH_SHORT).show();
@@ -163,7 +166,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
 
 
     public interface BottomSheetListener {
-        void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position);
+        void onSaveButtonClick(String EventID, String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position);
 
     }
 

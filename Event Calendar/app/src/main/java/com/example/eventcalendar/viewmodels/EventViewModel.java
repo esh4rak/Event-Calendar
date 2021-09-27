@@ -36,5 +36,15 @@ public class EventViewModel extends ViewModel {
     }
 
 
+    public void updateInfo(EventItem eventItem){
+        eventRepository.updateInfoFirebase(eventItem);
+    }
+
+
+    public void delete(String id){
+        eventRepository.deleteDataFirebase(id);
+    }
+
+
 
 }

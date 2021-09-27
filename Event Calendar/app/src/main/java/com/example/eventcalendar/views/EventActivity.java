@@ -7,7 +7,6 @@ import static com.example.eventcalendar.utils.CalendarUtils.monthYearFromDate;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -135,6 +134,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
                     null,
                     null,
                     null,
+                    null,
                     CalendarUtils.formattedDate(CalendarUtils.selectedDate),
                     "add",
                     0);
@@ -207,6 +207,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
                     } else if (item.getItemId() == R.id.cardThreeDot_edit) {
 
                         EventBottomSheet bottomSheet = new EventBottomSheet(
+                                eventItemArrayList.get(position).getId(),
                                 eventItemArrayList.get(position).getEventName(),
                                 eventItemArrayList.get(position).getStartTime(),
                                 eventItemArrayList.get(position).getEndTime(),
@@ -230,7 +231,9 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
 
     private void DeleteItem(int position) {
-        //Todo
+        eventViewModel.delete(eventItemArrayList.get(position).getId());
+        Toast.makeText(getApplicationContext(), "Deleted", Toast.LENGTH_SHORT).show();
+        eventAdapter.removeItem(position);
     }
 
 
@@ -242,27 +245,42 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
 
     @Override
-    public void onSaveButtonClick(String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position) {
-
-        String uniqueID = UUID.randomUUID().toString();
+    public void onSaveButtonClick(String EventID, String EventName, String StartTime, String EndTime, String Location, String Date, String AddOrUpdate, int Position) {
 
 
-        eventViewModel.addValue(
-                new EventItem(
-                        uniqueID,
-                        EventName,
-                        Date,
-                        StartTime,
-                        EndTime,
-                        Location
-                )
-        );
+        if (AddOrUpdate.equals("add")) {
+
+            String uniqueID = UUID.randomUUID().toString();
+
+            eventViewModel.addValue(
+                    new EventItem(
+                            uniqueID,
+                            EventName,
+                            Date,
+                            StartTime,
+                            EndTime,
+                            Location
+                    )
+            );
+
+            eventViewModel.insertResultLiveData.observe(this, s -> Toast.makeText(getApplicationContext(), "Event Added", Toast.LENGTH_SHORT).show());
+
+            getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
+
+        } else if (AddOrUpdate.equals("update")) {
 
 
-        eventViewModel.insertResultLiveData.observe(this, s -> Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show());
+            eventViewModel.updateInfo(new EventItem(
+                    EventID,
+                    EventName,
+                    Date,
+                    StartTime,
+                    EndTime,
+                    Location
+            ));
+            Toast.makeText(getApplicationContext(), "Event Updated", Toast.LENGTH_SHORT).show();
 
-
-        getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
+        }
 
 
     }
@@ -281,11 +299,4 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
         eventViewModel.getEventLiveData.observe(this, eventItems -> eventAdapter.getEvents(eventItems));
     }
 
-    private void showProgressBar() {
-        binding.progressBar.setVisibility(View.VISIBLE);
-    }
-
-    private void hideProgressBar() {
-        binding.progressBar.setVisibility(View.GONE);
-    }
 }

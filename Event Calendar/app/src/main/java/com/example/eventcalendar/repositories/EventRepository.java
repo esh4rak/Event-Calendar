@@ -1,5 +1,6 @@
 package com.example.eventcalendar.repositories;
 
+
 import androidx.lifecycle.MutableLiveData;
 import com.example.eventcalendar.models.EventItem;
 import com.google.firebase.auth.FirebaseAuth;
@@ -85,6 +86,35 @@ public class EventRepository {
         return getFireStoreMutableLiveData;
     }
 
+
+
+    //update Event
+
+    public void updateInfoFirebase(EventItem eventItem){
+        final String currentUser= firebaseAuth.getCurrentUser().getUid();
+        firebaseFirestore.collection("EventList").document(currentUser)
+                .collection("Event").document(eventItem.id)
+                .update("event_name",eventItem.eventName,
+                        "event_start_time",eventItem.startTime,
+                        "event_end_time",eventItem.endTime,
+                        "event_date",eventItem.date,
+                        "event_location",eventItem.location).addOnSuccessListener(aVoid -> {
+
+                        }).addOnFailureListener(e -> {
+
+                        });
+    }
+
+    //delete event
+
+    public void deleteDataFirebase(final String id){
+        final String currentUser= firebaseAuth.getCurrentUser().getUid();
+        firebaseFirestore.collection("EventList").document(currentUser).collection("Event")
+                .document(id).delete().addOnSuccessListener(aVoid -> {
+
+                });
+
+    }
 
 
 }
