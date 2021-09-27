@@ -23,7 +23,7 @@ https://github.com/esh4rak/Event-Calendar/blob/main/event_calendar.apk
 01. Google SignIn With Firebase
 02. Get user information from Google Account
 03. Calendar of a week view
-04. Insert data in Firebase
+04. Insert data in Firebase Firestore
 05. Retrive Data
 06. Update Data
 07. Delete Datas
