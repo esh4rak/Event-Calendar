@@ -2,7 +2,7 @@
  A basic Event Calendar application in Android using Java
  
 # Overview
-(https://github.com/esh4rak/Event-Calendar/blob/main/overview.jpg)
+![mvvm](https://github.com/esh4rak/Event-Calendar/blob/main/overview.jpg)
 
 
 # MVVM CRUD OF Event Calendar with Firestore in Java
