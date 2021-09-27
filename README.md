@@ -25,8 +25,7 @@ https://github.com/esh4rak/Event-Calendar/blob/main/event_calendar.apk
 03. Calendar of a week view
 04. Insert data in Firebase
 05. Retrive Data
-06. View Details
-07. Update Data
-08. Delete Datas
+06. Update Data
+07. Delete Datas
 
 
