@@ -9,22 +9,23 @@ import com.example.eventcalendar.models.EventItem;
 import com.example.eventcalendar.repositories.EventRepository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class EventViewModel extends ViewModel {
 
-    private MutableLiveData<ArrayList<EventItem>> eEvents;
+
     private EventRepository eventRepository;
     private MutableLiveData<Boolean> mIsUpdating = new MutableLiveData<>();
     public LiveData<String> insertResultLiveData;
+    public LiveData<ArrayList<EventItem>> getEventLiveData;
 
 
     public void init() {
-        if (eEvents != null) {
+        if (getEventLiveData != null) {
             return;
         }
         eventRepository = EventRepository.getInstance();
-        eEvents = eventRepository.getEvents();
     }
 
 
@@ -38,8 +39,8 @@ public class EventViewModel extends ViewModel {
     }
 
 
-    public LiveData<ArrayList<EventItem>> getEvents() {
-        return eEvents;
+    public void show() {
+        getEventLiveData = eventRepository.getDataFromFireStore();
     }
 
 

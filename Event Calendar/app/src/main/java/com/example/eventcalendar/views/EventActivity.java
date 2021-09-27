@@ -36,6 +36,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 
@@ -72,7 +73,8 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
         getUserInfo();
         initGoogleSignInClient();
-        init();
+        initViewModel();
+        initData();
 
     }
 
@@ -107,28 +109,13 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
     }
 
-    private void init() {
 
+    private void initViewModel() {
         eventViewModel = new ViewModelProvider(this).get(EventViewModel.class);
-
         eventViewModel.init();
+    }
 
-
-        eventViewModel.getEvents().observe(this, eventItems -> {
-
-            eventAdapter.updateData(eventItems);
-
-        });
-
-        eventViewModel.getIsUpdating().observe(this, aBoolean -> {
-            if (aBoolean) {
-                showProgressBar();
-            } else {
-                hideProgressBar();
-                //binding.eventRecyclerView.smoothScrollToPosition(eventViewModel.getEvents().getValue().size() - 1);
-            }
-        });
-
+    private void initData() {
 
         binding.previousWeekButton.setOnClickListener(view -> {
             CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
@@ -198,6 +185,15 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
 
         eventItemArrayList = new ArrayList<>();
+
+        eventViewModel.show();
+        eventViewModel.getEventLiveData.observe(this, new Observer<ArrayList<EventItem>>() {
+            @Override
+            public void onChanged(ArrayList<EventItem> eventItems) {
+                eventItemArrayList = eventItems;
+            }
+        });
+
 
         binding.eventRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -289,7 +285,6 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
                 Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
             }
         });
-
 
 
     }
