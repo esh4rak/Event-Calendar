@@ -7,22 +7,31 @@ import static com.example.eventcalendar.utils.CalendarUtils.monthYearFromDate;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 
+import com.bumptech.glide.Glide;
 import com.example.eventcalendar.R;
 import com.example.eventcalendar.databinding.ActivityMainBinding;
 import com.example.eventcalendar.models.EventItem;
+import com.example.eventcalendar.models.SignInUser;
 import com.example.eventcalendar.utils.CalendarUtils;
 import com.example.eventcalendar.viewmodels.MainActivityViewModel;
 import com.example.eventcalendar.adapters.CalendarAdapter;
 import com.example.eventcalendar.adapters.EventAdapter;
+import com.example.eventcalendar.viewmodels.SignInViewModel;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -41,6 +50,13 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
     private MainActivityViewModel mainActivityViewModel;
 
+    private GoogleSignInClient googleSignInClient;
+
+
+    private SignInViewModel signInViewModel;
+
+    private FirebaseAuth firebaseAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +67,44 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
 
         CalendarUtils.selectedDate = LocalDate.now();
+        firebaseAuth = FirebaseAuth.getInstance();
+
+        getUserInfo();
+        initGoogleSignInClient();
         init();
 
     }
 
+    private void initGoogleSignInClient() {
+        GoogleSignInOptions googleSignInOptions = new GoogleSignInOptions
+                .Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .build();
+        googleSignInClient = GoogleSignIn.getClient(getApplicationContext(), googleSignInOptions);
+
+    }
+
+    private void getUserInfo() {
+        signInViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.
+                getInstance(this.getApplication())).get(SignInViewModel.class);
+        signInViewModel.collectUserInfo();
+        signInViewModel.collectUserInfoLiveData.observe(this, new Observer<SignInUser>() {
+            @Override
+            public void onChanged(SignInUser signInUser) {
+                setProfile(signInUser);
+            }
+        });
+
+    }
+
+    private void setProfile(SignInUser signInUser) {
+        if(signInUser != null){
+            Glide.with(getApplicationContext()).load(signInUser.getImageUrl())
+                    .centerCrop().placeholder(R.drawable.ic_person_24).into(binding.profileImageId);
+            binding.profileNameId.setText(signInUser.getName());
+            binding.profileEmailId.setText(signInUser.getEmail());
+        }
+
+    }
 
     private void init() {
 
@@ -105,6 +155,11 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
                     0);
             bottomSheet.show(getSupportFragmentManager(), "playBottomSheetAllergies");
 
+        });
+
+
+        binding.signOutButtonId.setOnClickListener(view -> {
+            signOut();
         });
 
 
@@ -229,6 +284,13 @@ public class MainActivity extends AppCompatActivity implements EventBottomSheet.
 
     }
 
+    private void signOut() {
+        firebaseAuth.signOut();
+        googleSignInClient.signOut();
+        Intent intent= new Intent(getApplicationContext(),SignInActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private void showProgressBar() {
         binding.progressBar.setVisibility(View.VISIBLE);
