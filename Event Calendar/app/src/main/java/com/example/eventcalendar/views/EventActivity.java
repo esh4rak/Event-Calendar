@@ -36,7 +36,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 
@@ -75,6 +74,9 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
         initGoogleSignInClient();
         initViewModel();
         initData();
+        setWeekView();
+        setEventAdapter();
+        getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
 
     }
 
@@ -90,12 +92,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
         signInViewModel = new ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory.
                 getInstance(this.getApplication())).get(SignInViewModel.class);
         signInViewModel.collectUserInfo();
-        signInViewModel.collectUserInfoLiveData.observe(this, new Observer<SignInUser>() {
-            @Override
-            public void onChanged(SignInUser signInUser) {
-                setProfile(signInUser);
-            }
-        });
+        signInViewModel.collectUserInfoLiveData.observe(this, this::setProfile);
 
     }
 
@@ -120,14 +117,14 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
         binding.previousWeekButton.setOnClickListener(view -> {
             CalendarUtils.selectedDate = CalendarUtils.selectedDate.minusWeeks(1);
             setWeekView();
-            setEventAdapter();
+            getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
         });
 
         binding.nextWeekButton.setOnClickListener(view -> {
 
             CalendarUtils.selectedDate = CalendarUtils.selectedDate.plusWeeks(1);
             setWeekView();
-            setEventAdapter();
+            getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
 
         });
 
@@ -146,14 +143,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
         });
 
 
-        binding.signOutButtonId.setOnClickListener(view -> {
-            signOut();
-        });
-
-
-        setWeekView();
-        setEventAdapter();
-
+        binding.signOutButtonId.setOnClickListener(view -> signOut());
 
     }
 
@@ -174,7 +164,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
             CalendarUtils.selectedDate = days.get(position);
             setWeekView();
-            setEventAdapter();
+            getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
 
         });
 
@@ -183,17 +173,7 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
 
     private void setEventAdapter() {
 
-
         eventItemArrayList = new ArrayList<>();
-
-        eventViewModel.show();
-        eventViewModel.getEventLiveData.observe(this, new Observer<ArrayList<EventItem>>() {
-            @Override
-            public void onChanged(ArrayList<EventItem> eventItems) {
-                eventItemArrayList = eventItems;
-            }
-        });
-
 
         binding.eventRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
@@ -279,12 +259,10 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
         );
 
 
-        eventViewModel.insertResultLiveData.observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show();
-            }
-        });
+        eventViewModel.insertResultLiveData.observe(this, s -> Toast.makeText(getApplicationContext(), "Added", Toast.LENGTH_SHORT).show());
+
+
+        getEvents(CalendarUtils.formattedDate(CalendarUtils.selectedDate));
 
 
     }
@@ -295,6 +273,12 @@ public class EventActivity extends AppCompatActivity implements EventBottomSheet
         Intent intent = new Intent(getApplicationContext(), SignInActivity.class);
         startActivity(intent);
         finish();
+    }
+
+
+    private void getEvents(String date) {
+        eventViewModel.show(date);
+        eventViewModel.getEventLiveData.observe(this, eventItems -> eventAdapter.getEvents(eventItems));
     }
 
     private void showProgressBar() {
