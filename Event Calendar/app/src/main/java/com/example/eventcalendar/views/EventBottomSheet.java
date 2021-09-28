@@ -73,7 +73,7 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void setupFullHeight(BottomSheetDialog bottomSheetDialog) {
-        FrameLayout bottomSheet = (FrameLayout) bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
+        FrameLayout bottomSheet = bottomSheetDialog.findViewById(R.id.design_bottom_sheet);
         BottomSheetBehavior behavior = BottomSheetBehavior.from(bottomSheet);
         ViewGroup.LayoutParams layoutParams = bottomSheet.getLayoutParams();
 
@@ -172,26 +172,23 @@ public class EventBottomSheet extends BottomSheetDialogFragment {
             int minute = datetime.get(Calendar.MINUTE);
 
             TimePickerDialog mTimePicker;
-            mTimePicker = new TimePickerDialog(getContext(), new TimePickerDialog.OnTimeSetListener() {
-                @Override
-                public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                    String time = selectedHour + ":" + selectedMinute;
+            mTimePicker = new TimePickerDialog(getContext(), (timePicker, selectedHour, selectedMinute) -> {
+                String time = selectedHour + ":" + selectedMinute;
 
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
-                    Date date = null;
-                    try {
-                        date = fmt.parse(time);
-                    } catch (ParseException e) {
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
+                Date date = null;
+                try {
+                    date = fmt.parse(time);
+                } catch (ParseException e) {
 
-                        e.printStackTrace();
-                    }
-
-                    @SuppressLint("SimpleDateFormat") SimpleDateFormat fmtOut = new SimpleDateFormat("hh:mm aa");
-
-                    String formattedTime = fmtOut.format(date);
-
-                    binding.endTimeEditText.setText(formattedTime);
+                    e.printStackTrace();
                 }
+
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat fmtOut = new SimpleDateFormat("hh:mm aa");
+
+                String formattedTime = fmtOut.format(date);
+
+                binding.endTimeEditText.setText(formattedTime);
             }, hour, minute, false);//Yes 24 hour time
             mTimePicker.setTitle("Select Time");
             mTimePicker.show();
