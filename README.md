@@ -7,7 +7,7 @@
 ![mvvm](https://github.com/esh4rak/Event-Calendar/blob/main/overview.jpg)
 
 # APK File: 
-https://github.com/esh4rak/Event-Calendar/blob/main/event_calendar.apk
+https://github.com/esh4rak/Event-Calendar/blob/main/Event%20Calendar/app/release/app-release.apk
 
 # Project Structure
 ![mvvm](https://github.com/esh4rak/Event-Calendar/blob/main/project%20structure.png)
